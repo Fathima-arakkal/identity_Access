@@ -1,0 +1,77 @@
+﻿@model IEnumerable<IdClaimsPractice3.Models.Machine>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20210912/pngtree-aesthetic-background-pink-pastel-image_866344.jpg); /* Replace with the correct path to your image */
+        background-repeat: no-repeat;
+        background-size: 1920px; /* Adjust as needed */
+    }
+    .create-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #00BFFF;
+        color: #FFFFFF;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid #00BFFF;
+        border-radius: 5px;
+    }
+</style>
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="create-button">Create New</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MachineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MachineType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MachineName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MachineType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.LocationName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MachineId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MachineId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MachineId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
