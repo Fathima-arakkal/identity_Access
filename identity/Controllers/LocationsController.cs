@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InternshipProjectMini.Controllers
 {
-    [Authorize(Roles = "Admin , HR")]
+    [Authorize(Roles = "Admin ")]
     public class LocationsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,7 @@ namespace InternshipProjectMini.Controllers
         }
 
         // GET: Locations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> LocationsIndex()
         {
             return View(await _context.Location.ToListAsync());
         }

@@ -1,0 +1,100 @@
+﻿@model IdClaimsPractice3.Models.RolePermissionViewModel
+
+<h2>Manage Roles and Permissions</h2>
+
+<form asp-action="UpdatePermissions" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                @foreach (var role in Model.Roles)
+                {
+                    <th>
+                        <input class="form-check-input" type="checkbox" name="selectedRoles" value="@role.Id" />
+                        @role.Name
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Department</strong><br />
+                    Create<br />
+                    Edit<br />
+                    Details<br />
+                    Delete
+                </td>
+                @foreach (var role in Model.Roles)
+                {
+                    <td>
+                        <br />
+                        <input type="checkbox" name="departmentCreateRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="departmentEditRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="departmentDetailsRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="departmentDeleteRoles" value="@role.Id" /><br />
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <strong>Employee</strong><br />
+                    Create<br />
+                    Edit<br />
+                    Details<br />
+                    Delete
+                </td>
+                @foreach (var role in Model.Roles)
+                {
+                    <td>
+                        <br />
+                        <input type="checkbox" name="employeeCreateRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="employeeEditRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="employeeDetailsRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="employeeDeleteRoles" value="@role.Id" /><br />
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <strong>Machine</strong><br />
+                    Create<br />
+                    Edit<br />
+                    Details<br />
+                    Delete
+                </td>
+                @foreach (var role in Model.Roles)
+                {
+                    <td>
+                        <br />
+                        <input type="checkbox" name="machineCreateRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="machineEditRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="machineDetailsRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="machineDeleteRoles" value="@role.Id" /><br />
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <strong>Location</strong><br />
+                    Create<br />
+                    Edit<br />
+                    Details<br />
+                    Delete
+                </td>
+                @foreach (var role in Model.Roles)
+                {
+                    <td>
+                        <br />
+                        <input type="checkbox" name="locationCreateRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="locationEditRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="locationDetailsRoles" value="@role.Id" /><br />
+                        <input type="checkbox" name="locationDeleteRoles" value="@role.Id" /><br />
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Update Permissions</button>
+</form>

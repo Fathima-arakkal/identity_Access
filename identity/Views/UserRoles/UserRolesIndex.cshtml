@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+
+<h2>List of Roles</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Name</td>
+                <td>
+                    <a asp-controller="UserRoles" asp-action="ManageRoles" asp-route-userId="@role.Id">
+                        <i class="fas fa-wrench"></i> Manage Roles
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

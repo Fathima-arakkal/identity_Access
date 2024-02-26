@@ -19,7 +19,7 @@ namespace IdClaimsPractice3.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult AccessClaimsIndex()
         {
             return View();
         }

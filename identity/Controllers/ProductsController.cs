@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace IdClaimsPractice3.Controllers
 {
-    [Authorize(Roles = "Employees")]
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,8 @@ namespace IdClaimsPractice3.Controllers
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> ProductsIndex()
         {
               return _context.Products != null ? 
                           View(await _context.Products.ToListAsync()) :
@@ -30,6 +31,7 @@ namespace IdClaimsPractice3.Controllers
         }
 
         // GET: Products/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Products == null)

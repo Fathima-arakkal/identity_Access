@@ -23,7 +23,7 @@ namespace IdClaimsPractice3.Controllers
         }
 
         // List of roles
-        public IActionResult Index()
+        public IActionResult UserRolesIndex()
         {
             var roles = _roleManager.Roles.ToList();
             return View(roles);
@@ -47,30 +47,37 @@ namespace IdClaimsPractice3.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult UserRoles()
+        {
+            var usersWithRoles = _userManager.Users
+                .Select(user => new UserRolesViewModel
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName,
+                    Roles = _userManager.GetRolesAsync(user).Result.ToList()
+                })
+                .ToList();
+
+            return View(usersWithRoles);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> ManageRoles(string userId)
         {
-            var viewModel = new List<UserRolesViewModel>();
             var user = await _userManager.FindByIdAsync(userId);
-
-            foreach (var role in _roleManager.Roles.ToList())
+            if (user == null)
             {
-                var userRolesViewModel = new UserRolesViewModel
-                {
-                    RoleName = role.Name
-                };
-
-                if (await _userManager.IsInRoleAsync(user, role.Name))
-                {
-                    userRolesViewModel.Selected = true;
-                }
-
-                viewModel.Add(userRolesViewModel);
+                return NotFound();
             }
 
-            var model = new ManageUserRolesViewModel()
+            var model = new ManageUserRolesViewModel
             {
-                UserId = userId,
-                UserRoles = viewModel
+                UserId = user.Id,
+                UserRoles = _roleManager.Roles.Select(role => new UserRolesViewModel
+                {
+                    RoleName = role.Name,
+                    Selected = _userManager.IsInRoleAsync(user, role.Name).Result
+                }).ToList()
             };
 
             return View(model);
@@ -80,6 +87,11 @@ namespace IdClaimsPractice3.Controllers
         public async Task<IActionResult> UpdateRoles(string userId, ManageUserRolesViewModel model)
         {
             var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
             var roles = await _userManager.GetRolesAsync(user);
             await _userManager.RemoveFromRolesAsync(user, roles);
             await _userManager.AddToRolesAsync(user, model.UserRoles.Where(x => x.Selected).Select(y => y.RoleName));

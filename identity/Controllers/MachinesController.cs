@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InternshipProjectMini
 {
-    [Authorize(Roles = "Admin, HR")]
+    [Authorize(Roles = "Admin")]
     public class MachinesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,7 @@ namespace InternshipProjectMini
         }
 
         // GET: Machines
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> MachinesIndex()
         {
             var applicationDbContext = _context.Machine.Include(m => m.Location);
             return View(await applicationDbContext.ToListAsync());

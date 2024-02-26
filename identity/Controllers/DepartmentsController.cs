@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace IdClaimsPractice3.Controllers
 {
-    [Authorize(Roles = "Admin , Manager")]
+    [Authorize(Roles = "Admin ")]
     public class DepartmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,7 @@ namespace IdClaimsPractice3.Controllers
         }
 
         // GET: Departments
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> DepartmentsIndex()
         {
             return View(await _context.Department.ToListAsync());
         }
