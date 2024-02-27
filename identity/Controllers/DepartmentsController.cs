@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace IdClaimsPractice3.Controllers
 {
-    [Authorize(Roles = "Admin ")]
+    //[Authorize(Roles = "Admin ")]
     public class DepartmentsController : Controller
     {
         private readonly ApplicationDbContext _context;

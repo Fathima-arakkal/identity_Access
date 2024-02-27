@@ -29,10 +29,17 @@
                 {
                     <td>
                         <br />
-                        <input type="checkbox" name="departmentCreateRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="departmentEditRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="departmentDetailsRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="departmentDeleteRoles" value="@role.Id" /><br />
+                        <input type="hidden" name="Permissions[@role.Id].CanCreateDepartment" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanCreateDepartment" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanEditDepartment" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanEditDepartment" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDetailsDepartment" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDetailsDepartment" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDeleteDepartment" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDeleteDepartment" /><br />
                     </td>
                 }
             </tr>
@@ -48,10 +55,17 @@
                 {
                     <td>
                         <br />
-                        <input type="checkbox" name="employeeCreateRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="employeeEditRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="employeeDetailsRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="employeeDeleteRoles" value="@role.Id" /><br />
+                        <input type="hidden" name="Permissions[@role.Id].CanCreateEmployee" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanCreateEmployee" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanEditEmployee" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanEditEmployee" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDetailsEmployee" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDetailsEmployee" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDeleteEmployee" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDeleteEmployee" /><br />
                     </td>
                 }
             </tr>
@@ -67,10 +81,17 @@
                 {
                     <td>
                         <br />
-                        <input type="checkbox" name="machineCreateRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="machineEditRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="machineDetailsRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="machineDeleteRoles" value="@role.Id" /><br />
+                        <input type="hidden" name="Permissions[@role.Id].CanCreateMachine" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanCreateMachine" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanEditMachine" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanEditMachine" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDetailsMachine" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDetailsMachine" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDeleteMachine" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDeleteMachine" /><br />
                     </td>
                 }
             </tr>
@@ -86,13 +107,21 @@
                 {
                     <td>
                         <br />
-                        <input type="checkbox" name="locationCreateRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="locationEditRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="locationDetailsRoles" value="@role.Id" /><br />
-                        <input type="checkbox" name="locationDeleteRoles" value="@role.Id" /><br />
+                        <input type="hidden" name="Permissions[@role.Id].CanCreateLocation" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanCreateLocation" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanEditLocation" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanEditLocation" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDetailsLocation" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDetailsLocation" /><br />
+
+                        <input type="hidden" name="Permissions[@role.Id].CanDeleteLocation" value="false" />
+                        <input type="checkbox" name="Permissions[@role.Id].CanDeleteLocation" /><br />
                     </td>
                 }
             </tr>
+            <!-- Repeat similar code for other categories (Employee, Machine, Location) -->
         </tbody>
     </table>
 

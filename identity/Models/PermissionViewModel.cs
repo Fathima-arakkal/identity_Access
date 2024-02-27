@@ -1,10 +1,11 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+
 namespace IdClaimsPractice3.Models
 {
     public class PermissionViewModel
     {
         public string UserId { get; set; }
-
         public bool CanCreateDepartment { get; set; }
         public bool CanEditDepartment { get; set; }
         public bool CanDeleteDepartment { get; set; }
@@ -24,5 +25,16 @@ namespace IdClaimsPractice3.Models
         public bool CanEditMachine { get; set; }
         public bool CanDeleteMachine { get; set; }
         public bool CanViewMachine { get; set; }
+
+        public List<string> CurrentRoles { get; set; }
+        public List<string> SelectedRoles { get; set; }
+
+        public PermissionViewModel()
+        {
+            CurrentRoles = new List<string>();
+            SelectedRoles = new List<string>();
+        }
+
     }
 }
+

@@ -1,26 +1,49 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model List<IdentityRole>
+@inject UserManager<IdentityUser> UserManager
+<style>
 
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        background-image: url(https://i.pinimg.com/564x/05/a5/57/05a557a6f9fc04cf54ef24345f450c20.jpg); /* Replace with the correct path to your image */
+        background-repeat: no-repeat;
+        background-size: 2100px; /* Adjust as needed */
+    }
+</style>
 <h2>List of Roles</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var role in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
             <tr>
-                <td>@role.Name</td>
-                <td>
-                    <a asp-controller="UserRoles" asp-action="ManageRoles" asp-route-userId="@role.Id">
-                        <i class="fas fa-wrench"></i> Manage Roles
-                    </a>
-                </td>
+                <th>Role</th>
+                <th>Users</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>
+                        <!-- Display users under the current role in a nested table -->
+                        <table class="table table-sm">
+                            <tbody>
+                                @foreach (var user in await UserManager.GetUsersInRoleAsync(role.Name))
+                                {
+                                    <tr>
+                                        <td>@user.UserName</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

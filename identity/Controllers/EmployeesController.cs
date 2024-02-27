@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InternshipProjectMini.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;

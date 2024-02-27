@@ -5,17 +5,17 @@
 }
 
 <style>
-
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f4f4f4;
         color: #333;
         margin: 0;
         padding: 0;
-        background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20210912/pngtree-aesthetic-background-pink-pastel-image_866344.jpg); /* Replace with the correct path to your image */
+        background-image: url(https://i.pinimg.com/564x/05/a5/57/05a557a6f9fc04cf54ef24345f450c20.jpg); /* Replace with the correct path to your image */
         background-repeat: no-repeat;
-        background-size: 1920px; /* Adjust as needed */
+        background-size: 2100px; /* Adjust as needed */
     }
+
     .create-button {
         display: inline-block;
         padding: 10px 20px;
@@ -58,9 +58,9 @@
                     @Html.DisplayFor(modelItem => item.DepartmentNumber)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.DepartmentId" class="btn btn-primary"><i class="fas fa-pencil-alt"></i>Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.DepartmentId" class="btn btn-secondary"><i class="fas fa-eye"></i>Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.DepartmentId" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</a>
                 </td>
             </tr>
         }

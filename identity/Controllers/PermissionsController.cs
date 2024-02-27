@@ -13,15 +13,12 @@ namespace IdClaimsPractice3.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public PermissionsController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public PermissionsController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
-            _roleManager = roleManager;
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
-
         [HttpGet]
         public IActionResult ManagePermissions()
         {
@@ -69,33 +66,32 @@ namespace IdClaimsPractice3.Controllers
         public async Task<IActionResult> UpdatePermissions(RolePermissionViewModel model)
         {
             var role = await _roleManager.FindByIdAsync(model.SelectedRoleId);
+            if (model.Permissions != null) 
+            {
+                await UpdateRolePermission(role, "CanCreateDepartment", model.Permissions.CanCreateDepartment);
+                await UpdateRolePermission(role, "CanEditDepartment", model.Permissions.CanEditDepartment);
+                await UpdateRolePermission(role, "CanDeleteDepartment", model.Permissions.CanDeleteDepartment);
+                await UpdateRolePermission(role, "CanViewDepartment", model.Permissions.CanViewDepartment);
 
-            await UpdateRolePermission(role, "CanCreateDepartment", model.Permissions.CanCreateDepartment);
-            await UpdateRolePermission(role, "CanEditDepartment", model.Permissions.CanEditDepartment);
-            await UpdateRolePermission(role, "CanDeleteDepartment", model.Permissions.CanDeleteDepartment);
-            await UpdateRolePermission(role, "CanViewDepartment", model.Permissions.CanViewDepartment);
+                await UpdateRolePermission(role, "CanCreateEmployee", model.Permissions.CanCreateEmployee);
+                await UpdateRolePermission(role, "CanEditEmployee", model.Permissions.CanEditEmployee);
+                await UpdateRolePermission(role, "CanDeleteEmployee", model.Permissions.CanDeleteEmployee);
+                await UpdateRolePermission(role, "CanViewEmployee", model.Permissions.CanViewEmployee);
 
-            await UpdateRolePermission(role, "CanCreateEmployee", model.Permissions.CanCreateEmployee);
-            await UpdateRolePermission(role, "CanEditEmployee", model.Permissions.CanEditEmployee);
-            await UpdateRolePermission(role, "CanDeleteEmployee", model.Permissions.CanDeleteEmployee);
-            await UpdateRolePermission(role, "CanViewEmployee", model.Permissions.CanViewEmployee);
+                await UpdateRolePermission(role, "CanCreateMachine", model.Permissions.CanCreateMachine);
+                await UpdateRolePermission(role, "CanEditMachine", model.Permissions.CanEditMachine);
+                await UpdateRolePermission(role, "CanDeleteMachine", model.Permissions.CanDeleteMachine);
+                await UpdateRolePermission(role, "CanViewMachine", model.Permissions.CanViewMachine);
 
-            await UpdateRolePermission(role, "CanCreateMachine", model.Permissions.CanCreateMachine);
-            await UpdateRolePermission(role, "CanEditMachine", model.Permissions.CanEditMachine);
-            await UpdateRolePermission(role, "CanDeleteMachine", model.Permissions.CanDeleteMachine);
-            await UpdateRolePermission(role, "CanViewMachine", model.Permissions.CanViewMachine);
-
-            await UpdateRolePermission(role, "CanCreateLocation", model.Permissions.CanCreateLocation);
-            await UpdateRolePermission(role, "CanEditLocation", model.Permissions.CanEditLocation);
-            await UpdateRolePermission(role, "CanDeleteLocation", model.Permissions.CanDeleteLocation);
-            await UpdateRolePermission(role, "CanViewLocation", model.Permissions.CanViewLocation);
-
+                await UpdateRolePermission(role, "CanCreateLocation", model.Permissions.CanCreateLocation);
+                await UpdateRolePermission(role, "CanEditLocation", model.Permissions.CanEditLocation);
+                await UpdateRolePermission(role, "CanDeleteLocation", model.Permissions.CanDeleteLocation);
+                await UpdateRolePermission(role, "CanViewLocation", model.Permissions.CanViewLocation);
+            }
             return RedirectToAction(nameof(Index));
         }
         private async Task UpdateRolePermission(IdentityRole role, string permission, bool isSelected)
         {
-            var userManager = _userManager;
-
             if (isSelected)
             {
                 if (!await _roleManager.RoleExistsAsync(permission))
@@ -103,23 +99,20 @@ namespace IdClaimsPractice3.Controllers
                     await _roleManager.CreateAsync(new IdentityRole(permission));
                 }
 
-
-                var usersInRole = await userManager.GetUsersInRoleAsync(role.Name);
+                var usersInRole = await _userManager.GetUsersInRoleAsync(role.Name);
                 foreach (var user in usersInRole)
                 {
-                    await userManager.AddToRoleAsync(user, permission);
+                    await _userManager.AddToRoleAsync(user, permission);
                 }
             }
             else
             {
-
-                var usersInPermissionRole = await userManager.GetUsersInRoleAsync(permission);
+                var usersInPermissionRole = await _userManager.GetUsersInRoleAsync(permission);
                 foreach (var user in usersInPermissionRole)
                 {
-                    await userManager.RemoveFromRoleAsync(user, permission);
+                    await _userManager.RemoveFromRoleAsync(user, permission);
                 }
             }
         }
-
     }
 }
