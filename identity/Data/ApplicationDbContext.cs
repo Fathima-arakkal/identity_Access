@@ -17,8 +17,7 @@ namespace IdClaimsPractice3.Data
         public DbSet<Employee> Employee { get; set; } = null!;
         public DbSet<Location> Location { get; set; } = null!;
         public DbSet<Machine> Machine { get; set; } = null!;
-        //public DbSet<Permission> Permission { get; set; }
-
+      
       
     }
 }

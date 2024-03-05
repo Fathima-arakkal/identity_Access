@@ -1,7 +1,23 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+<style>
+    /* Style for login and register buttons */
+    .btn-login,
+    .btn-register {
+        color: #fff; /* Text color */
+        background-color: #007bff; /* Button background color */
+        border: 1px solid #007bff; /* Button border color */
+    }
 
+        /* Hover effect for login and register buttons */
+        .btn-login:hover,
+        .btn-register:hover {
+            background-color: #0056b3; /* Button background color on hover */
+            border: 1px solid #0056b3; /* Button border color on hover */
+        }
+
+</style>
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
